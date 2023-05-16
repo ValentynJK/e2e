@@ -5,17 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha.js --timeout=30000 ./tests",
-    "testKeyboard": "mocha --timeout=30000 ./tests/keyboardPress.test.js",
-    "testFormSubmission": "mocha --timeout=30000 ./tests/keyboardPress.test.js",
-    "testAssertion":  "mocha --timeout=30000 ./tests/keyboardPress.test.js"
-
-
+    "testSignUp": "mocha  --timeout=30000 ./tests/techCompanySignUp.test.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "chai": "^4.3.7",
+    "dotenv": "^16.0.3",
     "mocha": "^10.2.0",
     "puppeteer": "^20.1.2"
   }
