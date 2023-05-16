@@ -29,7 +29,7 @@ describe('Tech company sign up form test', () => {
   
   it('Should fill the Sign Up forms', async function () {
     const browser = await puppeteer.launch({
-      headless: "new", // headless options to run test in open or closed browser, "new" - to avoid warning
+      headless: false, // headless options to run test in open or closed browser, "new" - to avoid warning
       slowMo: 50,
       devtools: false
     });
@@ -62,12 +62,8 @@ describe('Tech company sign up form test', () => {
     console.log('Submitting the form')
     // TODO: Submit the form
 
-
     await browser.close();
-
   }) 
-
-
 }); 
 
 
