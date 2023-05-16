@@ -2,7 +2,7 @@
 
 ## Structure:
 1. [tets](tests) - actual tests
-   - [techCompanySignUp.test.js](tests/techCompanySignUp.test.js) - end2end test for Company Sign Up form on https://www.techtotherescue.orgtech#tech-form
+   - [techCompanySignUp.test.js](tests/techCompanySignUp.test.js) - end2end test for Company Sign Up form on https://www.techtotherescue.org/tech
 2. [utils](utils) - utility and support functions
 3. [data](data) - dataset for tests
 
