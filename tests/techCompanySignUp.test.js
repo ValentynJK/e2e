@@ -5,7 +5,7 @@
 
 const puppeteer = require('puppeteer');
 const {getTodayDate} = require('../utils/utils');
-const {SIGN_UP_DATA_SET} = require('../data/techCompanySignUpForm');
+const { CONTACT_INFO_DATASET, EXPERTISE_DATASET, CAUSEs_DATASET } = require('../data/techCompanySignUpForm');
 
 const {
   signingOnBehalf,
@@ -19,9 +19,25 @@ const {
   roleInTheCompany,
   experienceWithProBono,
   startDate
-} = SIGN_UP_DATA_SET
+} = CONTACT_INFO_DATASET;
 
+const {
+  welcomeText,
+  involvingType,
+  aboutCompany,
+  companySize,
+  softwareExpertise,
+  visualAndAccessibility,
+  dataManagementAndAnalytics,
+  digitalMarketing,
+  innovativeSolutions,
+  strategy,
+  other
+} = EXPERTISE_DATASET
 
+const { areaOfInterests, motivation } = CAUSES_DATASET;
+
+const checkboxSelectorClass = "checkmark position-relative sw-background-color-FAFAFC hover:sw-background-color-FAFAFC sw-font-size-m sw-text-color-212121 sw-font-family-default sw-border-radius-m sw-margin-top-6xs sw-margin-bottom-6xs sw-border-style-solid sw-border-width-xs sw-border-color-F0F0F4 hover:sw-border-style-solid hover:sw-border-width-xs hover:sw-border-color-AEAEB5 sw-box-shadow-none sw-display-inline-block sw-outline-none sw-checkbox-s"
 
 describe('Tech company sign up form test', () => {
 
@@ -31,7 +47,11 @@ describe('Tech company sign up form test', () => {
     const browser = await puppeteer.launch({
       headless: false, // headless options to run test in open or closed browser, "new" - to avoid warning
       slowMo: 50,
-      devtools: false
+      devtools: false,
+      defaultViewport: null,
+      args:[
+        '--start-fullscreen' 
+     ]
     });
     const page = await browser.newPage();
     page.setDefaultTimeout(10000); // default timeout
@@ -58,10 +78,43 @@ describe('Tech company sign up form test', () => {
     await page.select(`[id="sw-form-capture-Job role"]`, roleInTheCompany);
     await page.select(`[id="sw-form-capture-Pro Bono Experience From Signup"]`, experienceWithProBono);
     await page.select(`[id="sw-form-capture-Availability From Signup"]`, startDate);
-
-    console.log('Submitting the form')
+    await page.click(`span[class="${checkboxSelectorClass}"]`, {click:1});
+    
+    console.log(`Submitting the form by pressing "JOIN"`);
     // TODO: Submit the form
+    await page.click(`a[id="sw-sign-up-submit-btn"]`, { click:1 })
+    
+    console.log('Goes to the Expertise');
+    await page.waitForNavigation();
+    await page.click(`#${involvingType.haveTeam}`, { click: 1 });
+    await page.type("#field142423073", aboutCompany, {slowMo: 10});
+    await page.select('#field142423067', companySize);
+    await page.click(`#${softwareExpertise.backendDev}`, {click: 1});
+    await page.click(`#${visualAndAccessibility.graphicDesign}`, {click: 1});
+    await page.click(`#${dataManagementAndAnalytics.checkAll}`, {click: 1});
+    await page.click(`#${digitalMarketing.contentMarketing}`, {click: 1});
+    await page.click(`#${innovativeSolutions.ai}`, {click: 1});
+    await page.click(`#${innovativeSolutions.ml}`, {click: 1});
+    await page.click(`#${strategy.businessIntelligence}`, {click: 1});
+    
+    console.log('Goes to Causes')
+    await page.click('#fsNextButton5238072', { click: 1 });
 
+    console.log('Fills Causes')
+    await page.click(`#${areaOfInterests.noPoverty}`, {click: 1});
+    await page.click(`#${areaOfInterests.qualityEducation}`, {click: 1}); 
+    await page.click(`#${areaOfInterests.genderEquality}`, {click: 1});
+    await page.type('#field142786765', motivation)
+    
+    console.log(`Goes to let's meet`);
+    // TODO: bring changes to the automation which aware Matching Team about new Engagement. Not to inform about tests
+    // ? Not inform about cases which contains "TTTR TEST" 
+    console.log('Submits form')
+    await page.click('#fsSubmitButton5238072', { click: 1 });
+    
+    console.log('Wait for redirection')
+    await page.waitForNavigation();
+    console.log('Success')
     await browser.close();
   }) 
 }); 
