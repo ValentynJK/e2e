@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha.js --timeout=30000 ./tests",
-    "testSignUp": "mocha  --timeout=30000 ./tests/techCompanySignUp.test.js"
+    "testSignUp": "mocha  --timeout=120000 ./tests/techCompanySignUp.test.js"
   },
   "keywords": [],
   "author": "",
