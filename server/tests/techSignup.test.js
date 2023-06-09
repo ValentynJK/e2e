@@ -44,7 +44,7 @@ async function techCompanySignUp() {
     const browser = await puppeteer.launch({
       executablePath: process.env.NODE_ENV === "production" ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath(),
       headless: 'new', // headless options to run test in open or closed browser, "new" - to avoid warning
-      // slowMo: 50,
+      slowMo: 50,
       devtools: false,
       defaultViewport: null,
       args: [
