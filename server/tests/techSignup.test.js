@@ -80,8 +80,8 @@ async function techCompanySignUp() {
     await page.waitForSelector('#wisepops-container-423358'); // hackaton popup
     log = [...log, 'Clothing popup window']
     console.log('Waits for popup close button')
-    await page.waitForSelector(`button[class="PPopupCloseButton__InnerPopupCloseButton-srj7me-0 dWHsqE wisepops-close"]`); // hackaton popup
-    await page.click(`button[class="PPopupCloseButton__InnerPopupCloseButton-srj7me-0 dWHsqE wisepops-close"]`, { click: 1 })
+    await page.waitForSelector(`button[class="PopupCloseButton__InnerPopupCloseButton-srj7me-0 dWHsqE wisepops-close"]`); // hackaton popup
+    await page.click(`button[class="PopupCloseButton__InnerPopupCloseButton-srj7me-0 dWHsqE wisepops-close"]`, { click: 1 })
 
     log = [...log, 'Clicks the Sing Up and go to the form']
     // console.log('Click the Sing Up and go to the form')
