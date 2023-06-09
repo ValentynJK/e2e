@@ -38,23 +38,23 @@ const { areaOfInterests, motivation } = CAUSES_DATASET;
 const checkboxSelectorClass = "checkmark position-relative sw-background-color-FAFAFC hover:sw-background-color-FAFAFC sw-font-size-m sw-text-color-212121 sw-font-family-default sw-border-radius-m sw-margin-top-6xs sw-margin-bottom-6xs sw-border-style-solid sw-border-width-xs sw-border-color-F0F0F4 hover:sw-border-style-solid hover:sw-border-width-xs hover:sw-border-color-AEAEB5 sw-box-shadow-none sw-display-inline-block sw-outline-none sw-checkbox-s"
 
 async function techCompanySignUp() {
+
+  const browser = await puppeteer.launch({
+    executablePath: process.env.NODE_ENV === "production" ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath(),
+    headless: 'new', // headless options to run test in open or closed browser, "new" - to avoid warning
+    slowMo: 50,
+    devtools: false,
+    defaultViewport: null,
+    args: [
+      '--disable-setuid-sandbox',
+      '--no-sandbox',
+      '--single-process',
+      '--no-zygote',
+      '--start-fullscreen'
+    ]
+  });
   try {
     let log = []
-
-    const browser = await puppeteer.launch({
-      executablePath: process.env.NODE_ENV === "production" ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath(),
-      headless: 'new', // headless options to run test in open or closed browser, "new" - to avoid warning
-      slowMo: 50,
-      devtools: false,
-      defaultViewport: null,
-      args: [
-        '--disable-setuid-sandbox',
-        '--no-sandbox',
-        '--single-process',
-        '--no-zygote',
-        '--start-fullscreen'
-      ]
-    });
     const page = await browser.newPage();
     page.setDefaultTimeout(15000); // default timeout
     page.setDefaultNavigationTimeout(30000); // timeout for navigation steps
