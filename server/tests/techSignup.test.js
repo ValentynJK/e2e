@@ -39,27 +39,36 @@ const checkboxSelectorClass = "checkmark position-relative sw-background-color-F
 
 async function techCompanySignUp() {
 
+  console.log("Setting browser")
+
   const browser = await puppeteer.launch({
     executablePath: process.env.NODE_ENV === "production" ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath(),
-    headless: 'new', // headless options to run test in open or closed browser, "new" - to avoid warning
+    headless: true, // headless options to run test in open or closed browser, "new" - to avoid warning
     slowMo: 50,
     devtools: false,
     defaultViewport: null,
     args: [
+      '--disable-gpu',
+      '--disable-dev-shm-usage',
       '--disable-setuid-sandbox',
+      '--no-first-run',
       '--no-sandbox',
-      '--single-process',
       '--no-zygote',
-      '--start-fullscreen'
+      '--deterministic-fetch',
+      '--disable-features=IsolateOrigins',
+      '--disable-site-isolation-trials',
     ]
   });
+  console.log("Browser set")
   try {
     let log = []
+    console.log("Setting page")
     const page = await browser.newPage();
+    console.log("Page is set")
     page.setDefaultTimeout(15000); // default timeout
     page.setDefaultNavigationTimeout(30000); // timeout for navigation steps
     log = [...log, 'Goes to signup form']
-    // console.log('Goes to sign up form');
+    console.log('Goes to sign up form');
     await page.goto('https://www.techtotherescue.orgggggg/tech');
     log = [...log, 'Accepting Cookies']
     // console.log('Accepting Cookies')
