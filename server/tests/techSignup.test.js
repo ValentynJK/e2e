@@ -43,7 +43,7 @@ async function techCompanySignUp() {
 
   const browser = await puppeteer.launch({
     executablePath: process.env.NODE_ENV === "production" ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath(),
-    headless: true, // headless options to run test in open or closed browser, "new" - to avoid warning
+    headless: "new", // headless options to run test in open or closed browser, "new" - to avoid warning
     slowMo: 50,
     devtools: false,
     defaultViewport: null,
@@ -76,8 +76,11 @@ async function techCompanySignUp() {
     await page.click('button ::-p-text(Accept)', { click: 1 });
     log = [...log, 'Waiting for the popup (approx. 12 sec)']
     await page.waitForTimeout(15000);
+    console.log('Waits for popup')
     await page.waitForSelector('#wisepops-container-423358'); // hackaton popup
     log = [...log, 'Clothing popup window']
+    console.log('Waits for popup close button')
+    await page.waitForSelector(`button[class="PPopupCloseButton__InnerPopupCloseButton-srj7me-0 dWHsqE wisepops-close"]`); // hackaton popup
     await page.click(`button[class="PPopupCloseButton__InnerPopupCloseButton-srj7me-0 dWHsqE wisepops-close"]`, { click: 1 })
 
     log = [...log, 'Clicks the Sing Up and go to the form']
