@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+require('dotenv').config()
 const { getTodayDate } = require('../../utils/utils');
 const { CONTACT_INFO_DATASET, EXPERTISE_DATASET, CAUSES_DATASET } = require('../../data/techCompanySignUpForm');
 
@@ -41,11 +42,16 @@ async function techCompanySignUp() {
     let log = []
 
     const browser = await puppeteer.launch({
+      executablePath: process.env.NODE_ENV === "production" ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath(),
       headless: 'new', // headless options to run test in open or closed browser, "new" - to avoid warning
       // slowMo: 50,
       devtools: false,
       defaultViewport: null,
       args: [
+        '--disable-setuid-sandbox',
+        '--no-sandbox',
+        '--single-process',
+        '--no-zygote',
         '--start-fullscreen'
       ]
     });
