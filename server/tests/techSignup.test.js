@@ -69,7 +69,7 @@ async function techCompanySignUp() {
     page.setDefaultNavigationTimeout(30000); // timeout for navigation steps
     log = [...log, 'Goes to signup form']
     console.log('Goes to sign up form');
-    await page.goto('https://www.techtotherescue.orgggggg/tech');
+    await page.goto('https://www.techtotherescue.org/tech');
     log = [...log, 'Accepting Cookies']
     // console.log('Accepting Cookies')
     await page.waitForSelector('button ::-p-text(Accept)');
